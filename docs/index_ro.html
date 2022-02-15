@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<meta name = "viewport" content="width=device-width, initial-scale=1">
+<head><title>VirtualMCP Help</title>
+<meta name="keywords" content="Sinumerik online monitoring, Sinumerik 840D remote diagnosis, Sitrain simulator, Step7 scope monitoring, Totally Integrated Automation, MCP Machine Control Panel Simulation, Virtual MCP, Virtual Machine Control Panel">
+<meta name="description" content="Virtual MCP for Sinumerik 840D Solution Line">
+  <style>
+   * {
+    box-sizing: border-box;
+   }
+/* Logo */
+   .para1 {
+   margin-top: 5px;
+   margin-left:  15px;
+   margin-right: 10px;
+   font-family: Arial;
+   font-size: 14px;
+   line-height: 10px;
+   text-align: right;
+   color: #004080; }
+   .para2 { 
+   margin-top: 10px;
+   margin-left:  15px;
+   margin-right: 10px;
+   font-family: Arial;
+   font-size: 50px;
+   line-height: 50px;
+   text-align: left;
+   color: #303050; }
+   .para3 {
+   margin-top: -20px;
+   margin-left: 240px;
+   margin-right: 10px;
+   font-family: Arial;
+   font-size: 40px;
+   line-height: 35px;
+   text-align: left;
+   color: #90909F; }
+/* Bara Meniu */
+   ul.menubar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #00000F;}
+   ul.menubar li {float: left;}
+   ul.menubar li a {
+    display: block;
+    color: #F4F4FF;
+    text-align: left;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;}
+   ul.menubar li a.active {background-color: #004080;}
+   ul.menubar li.right {float: right;}
+   u1.menubar.li.dropdown {float: left; overflow: hidden;}
+   .dropdown .dropbtn {
+    font-size: 17px;
+    border: none;
+    outline: none;
+    color: #F4F4FF;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;}
+   .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #90909F;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;}
+   .dropdown-content a {
+    float: none;
+    color: #F4F4FF;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;}
+   .dropdown:hover .dropdown-content {
+    display: block;}
+   .menubar a:hover, .dropdown:hover .dropbtn .dropdown-content a:hover{
+    background-color: #404040;
+   }
+   @media screen and (max-width:600px){
+    ul.menubar li, ul.menubar li.right {float: none;}
+   }
+/* Coloana: latime variabila */
+   .coloana {
+    float: left;
+    width: auto;
+    padding: 10px;}
+/* Rand; curat 'float' dupa coloane */
+   .rand {
+   height: auto; overflow: hidden;}
+   .rand:after {
+    content: "";
+    display: table;
+    clear: both;}
+   }
+  </style>
+</head>
+<!-- START BODY ... -->
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<!-- START Header Area ... -->
+<a name="#top"> </a>
+<div class="para1" align="center">v20.05.26; Mai.2020</div>
+<div class="para2" align="center"><b>Virtual MCP</b></div>
+<div class="para3" align="center"><b>ajutor</b></div>
+<!-- hr color="#004080" size="2" -->
+<!-- END Header Area ... -->
+<!-- START Menu Bar ... -->
+<ul class="menubar">
+  <li><a href="http://alxcor.github.io/index.html">Home</a></li>
+  <li><a class="active" href="index_ro.html">VirtualMCP</a></li>
+  <li><a href="download/virtualmcp.zip">Download</a></li>
+  <li><div class="dropdown">
+   <button class="dropbtn">Ajutor pentru...</button>
+   <div class="dropdown-content">
+    <a href="#connection">Conectare</a>
+    <a href="#more">Alte Setari</a>
+    </div>
+  </div>
+  </li>
+  <li class="right">
+    <a href="index.html">English</a>
+  </li>
+</ul>
+<!-- END Menu Bar ... -->
+<img alt="Monitrain" title="Screen Overview" src="images/mtr_head.png" style="width:100%; height:auto">
+<hr color="#004080" size="1">
+<br>
+VirtualMCP este un mic program ce emuleaza comportamentul unui panou de control SINUMERIK de tip MCP483 sau MCP310 atunci cand este conectat la un echipament SINUMERIK 840D.<br>
+<br>
+Programul poate fi utilizat pentru controlul la distanta a unui echipament real, atunci cand panoul MCP real este inaccesibil sau greu accesibil pentru utilizator.<br>
+<br>
+<br>
+<b>Noutati:</b><br>
+<b>v20.05.26:</b> Corectat unele probleme legate de dimensiunea fonturilor.<br>
+<b>v20.05.23:</b> La conectare sunt citite setarile pentru MCP din echipamentul real: numarul de module MCP si adresele acestora.<br>
+<b>v20.05.14:</b> Simulare pentru MCP483, MCP310, posibilitatea de a seta 'Read-Only' sau 'Control Taste' sau 'Control Taste si Override'.<br>
+<br>
+<hr color="#004080" size="1">
+<a name="connection"><h2>Conectare</h2></a>
+<div class="rand">
+ <div class="coloana">
+  <img alt="Monitor5" title="Screen Overview" src="images/connection_0.png"><br>
+ </div>
+ <div class="coloana">
+  <b>Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati (Step7-PLC sau actionare Sinamics Drive)<br><br>
+  <b>Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
+  <b>Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 0 pentru seria S7-1500</b> sau <b>Slot 2 pentru seria S7-300</b><br><br>
+ </div>
+</div>
+<b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
+<hr color="#004080" size="1">
+<a name="address"><h2>Adrese MCP I/O</h2></a>
+<div class="rand">
+ <div class = "coloana">
+ <img alt="Monitor5" title="Screen Overview" src="images/connection_1.png">
+ </div>
+ <div class="coloana">
+ Setari pentru conexiune: Adrese Intrari si Iesiri MCP:<br><br>
+ <b>MCP1:</b>Adresele I/O pentru primul MCP.<br><br>
+ <b>MCP2:</b>Adresele I/O pentru al doilea MCP.<br><br>
+ <b>Act.:</b>Adresele I/O setate pentru VirtualMCP. Campurile sunt editabile.<br><br>
+ </div>
+</div>
+Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.<br>
+Pentru a configura modulele MCP, fabricantul masinii unelte (OEM) trebuie sa defineasca numarul de panouri MCP folosite si adresele I/O corespunzatoare acestora prin parametrizarea apelului functiei FB1,DB7 din blocul OB100.<br><br>
+La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora.<br>
+<br>
+<b>Note</b> It is not unusual for the OEM to use a DB area instead of Inputs and Outputs for the MCP, as in the image.<br><br>
+<hr color="#004080" size="1">
+<div class="rand">
+ <div class="coloana">
+  <img alt="Save" src="images/button_save.png">
+ </div>
+ <div class="coloana" style="float:none">
+  Salvati setarile cu butonul "Save"
+ </div>
+</div>
+<hr color="#004080" size="1">
+<a name="more"><h2>Alte setari</h2></a>
+La apasarea butonului "Save", setarile sunt salvate in fisierul "monitor.ini" localizat in acelasi director/folder cu fisierul executabil.<br>
+Toate setarile pot fi modificate in acest fisier si vor fi activate la pornirea/repornirea programului.<br><br>
+<br>
+<b>[display]</b> <i>;diverse setari referitoare la afisare</i><br>
+<b>language=</b>0 <i>;0 = Romana; 1 = English</i><br>
+<b>stayontop=</b>0 <i>;0 = Stay on Top dezactivat; 1 = Stay on Top activat</i><br>
+<b>displ_time=</b>50 <i>;Afisare ecran la fiecare 50ms</i><br>
+<b>anim=</b>5 <i>;Fiecare pas (pentru animatii) este de 5 pixeli</i><br>
+<br><br>
+<b>[connection]</b> <i>;Diverse setari referitoare la conectare</i><br>
+<b>autoreconnect=</b>false <i>;Cand valoarea este <b>true</b>: La pierderea conexiunii sau daca o cenexiune nu este posibila, programul va incerca din nou sa se conecteze pana cand o cenexiune este efectuata sau este apasat butonul 'Deconectare'</i><br>
+<b>reconnect_time=</b>5 <i>;Numarul de secunde intre doua incercari de reconectare</i><br>
+<br><br>
+<b>[server]</b> <i>;Adresa unitatii CPU a PLC</i><br>
+<b>address=</b>192.168.212.222 <i>;Adresa IP a PLC CPU</i><br>
+<b>rack=</b>0 <i>;Numarul rack-ului pe care se afla PLC CPU, implicit 0</i><br>
+<b>slot=</b>0 <i>; Numarul slotului pe care se afla PLC CPUr, implicit 0 pt S7-1500 sau 2 pt S7-300</i><br>
+<br><br>
+<b>[address]</b> <i>;Setari referitoare la adresele PLC </i><br>
+<table><tbody>
+<tr><td><b>in_0_type=</b></td><td>I</td><td>;[I/Q/M/DB]</td><td><i>;Tip operand pentru prima coloana: intrari</i></td></tr>
+<tr><td><b>in_0_dbno=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar DB, daca tipul operandului este DB</i></td></tr>
+<tr><td><b>in_0_addr=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar Byte</i></td></tr>
+
+<tr><td><b>out_0_type=</b></td><td>Q</td><td>;[I/Q/M/DB]</td><td><i>;Tip operand pentru a 2-a coloana: iesiri</i></td></tr>
+<tr><td><b>out_0_dbno=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar DB, daca tipul operandului este DB</i></td></tr>
+<tr><td><b>out_0_addr=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar Byte</i></td></tr>
+
+</tbody></table>
+<br><br>
+
+<hr color="#004080" size="2">
+</body></html>
