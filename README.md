@@ -7,6 +7,5 @@ The program may be used to control a real Sinumerik when the actual MCP is not a
 
 Project build on Qt5, using Snap7 (by Davide Nardella).
 
-Provides axis monitoring for Sinumerik 840Dsl, drive monitoring for Sinamics G110, G120, S110, S120 drives
 
 
