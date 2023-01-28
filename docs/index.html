@@ -1,227 +1,263 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<meta name = "viewport" content="width=device-width, initial-scale=1">
-<head><title>VirtualMCP Help</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="keywords" content="Sinumerik online monitoring, Sinumerik 840D remote diagnosis, Sitrain simulator, Step7 scope monitoring, Totally Integrated Automation, MCP Machine Control Panel Simulation, Virtual MCP, Virtual Machine Control Panel">
 <meta name="description" content="Virtual MCP for Sinumerik 840D Solution Line">
+<head><title>VirtualMCP Help</title>
   <style>
-   * {
-    box-sizing: border-box;
-   }
-/* Logo */
-   .para1 {
-   margin-top: 5px;
-   margin-left:  15px;
-   margin-right: 10px;
-   font-family: Arial;
-   font-size: 14px;
-   line-height: 10px;
-   text-align: right;
-   color: #004080; }
-   .para2 { 
-   margin-top: 10px;
-   margin-left:  15px;
-   margin-right: 10px;
-   font-family: Arial;
-   font-size: 50px;
-   line-height: 50px;
-   text-align: left;
-   color: #303050; }
-   .para3 {
-   margin-top: -20px;
-   margin-left: 240px;
-   margin-right: 10px;
-   font-family: Arial;
-   font-size: 40px;
-   line-height: 35px;
-   text-align: left;
-   color: #90909F; }
-/* Bara Meniu */
-   ul.menubar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #00000F;}
-   ul.menubar li {float: left;}
-   ul.menubar li a {
-    display: block;
-    color: #F4F4FF;
-    text-align: left;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;}
-   ul.menubar li a.active {background-color: #004080;}
-   ul.menubar li.right {float: right;}
-   u1.menubar.li.dropdown {float: left; overflow: hidden;}
-   .dropdown .dropbtn {
-    font-size: 17px;
-    border: none;
-    outline: none;
-    color: #F4F4FF;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;}
-   .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #90909F;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;}
-   .dropdown-content a {
-    float: none;
-    color: #F4F4FF;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;}
-   .dropdown:hover .dropdown-content {
-    display: block;}
-   .menubar a:hover, .dropdown:hover .dropbtn .dropdown-content a:hover{
-    background-color: #404040;
-   }
-   @media screen and (max-width:600px){
-    ul.menubar li, ul.menubar li.right {float: none;}
-   }
-/* Coloana: latime variabila */
-   .coloana {
-    float: left;
-    width: auto;
-    padding: 10px;}
-/* Rand; curat 'float' dupa coloane */
-   .rand {
-   height: auto; overflow: hidden;}
-   .rand:after {
-    content: "";
-    display: table;
-    clear: both;}
-   }
+    /* Setari generale: chenar, fonturi, etc. */
+    * { box-sizing: border-box;}
+    body {color: #000000; background-color: #FFFFFF;}
+    body {font-family: Arial, sans-serif; font-size: 100%;}
+    h1 {font-family: Garamond, serif; font-size: 2.500rem;}
+    h2 {font-family: Garamond, serif; font-size: 1.875rem;}
+    h3 {font-family: Garamond, serif; font-size: 1.300rem;}
+    table {border-collapse: collapse;width: 100%;}
+    th {border: 1px solid #004080;}
+    td {border: 1px solid #004080;}
+    tr:nth-child(odd) {background-color: rgba(120, 120, 170, 0.4);}
+    /* Logo: data/versiune; titlu; subtitlu */
+    .logo1p {
+      margin-top: 5px; margin-left: 15px; margin-right: 10px;
+      font-family: Arial; font-size: 0.8rem; line-height: 10px;
+      text-align: right; color: #90909F; }
+    .logo2p { 
+      margin-top: 10px; margin-left: 15px; margin-right: 10px;
+      font-family: Arial; font-size: 3rem; line-height: 50px;
+      text-align: left; color: #303050; }
+    .logo3p {
+      margin-top: -20px; margin-left: 100px; margin-right: 10px;
+      font-family: Arial; font-size: 2.5rem; line-height: 35px;
+      text-align: left; color: #90909F; }
+    /* Bara meniu orizontal: setari fundal */
+    .menu_bar {
+      display: flex; flex-direction: row; align-items: center;
+      background-color: #303050;
+      background: linear-gradient(to left, #00000F, #505070);
+      color: #90909F; height: 50px; font-family: Arial;
+      position: sticky; top: 0;  padding: 0;}
+    /* Bara meniu orizontal: Menu Button Container */
+    .menu_ctn {
+      display: none; height: 100%; width: 60px; cursor: pointer;
+      flex-direction: column; justify-content: center;
+      align-items: center;}
+    /* Bara meniu orizontal: Menu Button */
+    .menu_btn, .menu_btn::before, .menu_btn::after {
+      display: block; background-color: #90909F; position: absolute;
+      height: 4px; width: 30px; border-radius: 2px;
+      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);}
+    .menu_btn::before { content: ''; margin-top: -8px;}
+    .menu_btn::after  { content: ''; margin-top:  8px;}
+    #menu_tog { display: none;}
+    #menu_tog:checked + .menu_ctn .menu_btn {
+      background: rgba(255, 255, 255, 0);}
+    #menu_tog:checked + .menu_ctn .menu_btn::before {
+      margin-top: 0px; transform: rotate(45deg);}
+    #menu_tog:checked + .menu_ctn .menu_btn::after {
+      margin-top: 0px; transform: rotate(-45deg);}
+    /* Bara meniu orizontal: lista orizontala */
+    .menu_lst {
+      display: flex; flex-direction: row; list-style-type: none;
+      margin: 0; padding: 0;}
+    /* Bara meniu orizontal: setari elemente lista li */
+    .menu_lst > li { margin: 0; overflow: hidden;}
+    .menu_lst li:hover { background:#404040;}
+    .menu_lst li.active {background-color: #6060A0;}
+    /* Bara meniu orizontal: setari aliniat li */
+    .menu_lst li a {
+      display: block; color: #F4F4FF; text-align: left;
+      padding: 14px; text-decoration: none; font-size: 1rem;}
+    .menu_lst li a:hover{ background-color: #404040;}
+    /* Element principal tip 1 */
+    .elem_top { background: url("images/header.png") center;
+      background-size: cover; padding: 0rem 2rem; padding-bottom: 10rem;
+      display: grid; align-items: center;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));}
+    .elem_top > * {color: white;}
+    .elem_top > h1 {font-size: 3rem; padding-bottom: 0.5rem;
+      background-color: rgba(0,0,0,0.5); color: #F0F0FF;}
+    /* Element principal tip 2 */
+    .elem_tos { padding: 0rem; margin: 0rem;}
+    .elem_tos > figure {height: 340px; overflow: hidden; margin:0rem;}
+    /* Element lista 2*/
+    .elem_lst {padding: 0.2rem; margin 0.2rem;}
+    .elem_lst > ul {
+      list-style-type: none; display: list-item; grid-gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      padding: 0.2rem;}
+    .elem_lst > ul > li {border: 0px solid #90909F; border-bottom: 1px solid #90909F;}
+    .elem_lst > ul > li > figure {
+      height: 200px; overflow: hidden; margin:0.1rem;}
+    .elem_lst > ul > li > figure > img {width: 100%;}
+    .elem_lst > ul > li > figure > figcaption {
+      position: absolute; bottom: 0;
+      background-color: rgba(0,0,0,0.7); width: 100%;}
+    .elem_lst > ul > li > figure > figcaption > h3 {
+      color: white; padding: .75rem; font-size: 1.25rem;}
+    .elem_lst > ul > li > p {
+      font-size: 1rem; line-height: 1.1rem; padding: 0.2rem 0.2rem;
+      <!--color: #90909F;-->}
+    .elem_lst > ul > li > p > a {
+      font-size: 0.8rem; line-height: 1; padding: 0.5rem;
+      background-color: 40404F; text-decoration: none;
+      color: FFFFFF; border-radius: .25rem;
+      text-align: center; display: inline-block;}
+    .mono {font-family: monospace; margin-left: 20px;}
+    .par1 {margin-left: 20px;}
+    .maxp {max-width: 100%;}
+    .footer {
+      background-color: #40404F; color: white; padding: .25rem;
+      text-align: right; font-size: .5rem;}
+    @media (max-width: 800px) {
+      .menu_ctn { display: flex;}
+      #menu_tog ~ .menu_lst li {
+        height: 0; margin: 0; padding: 0; border: 0;
+        transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);}
+      #menu_tog:checked ~ .menu_lst li {
+        border: 1px solid #30303F; height: 2.5rem;
+        transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);}
+      .menu_lst {
+        position: absolute; top: 0; margin-top: 50px; left: 0;
+        flex-direction: column; width: 100%;
+        justify-content: center; align-items: center;}
+      .menu_lst > li {
+        display: flex; justify-content: left; margin: 0;
+        padding: 0.5rem 0; width: 100%; color: white;
+        background-color: #10102F;}
+    }
+    @media (prefers-color-scheme: light) {
+      body {color: #000000; background-color: #FFFFFF;}
+    }
+    @media (prefers-color-scheme: dark) {
+      body {color: #FFFFFF; background-color: #000000;}
+    }
   </style>
 </head>
 <!-- START BODY ... -->
-<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
-<!-- START Header Area ... -->
-<a name="#top"> </a>
-<div class="para1" align="center">v20.05.26; May.2020</div>
-<div class="para2" align="center"><b>Virtual MCP</b></div>
-<div class="para3" align="center"><b>help</b></div>
-<!-- hr color="#004080" size="2" -->
-<!-- END Header Area ... -->
-<!-- START Menu Bar ... -->
-<ul class="menubar">
-  <li><a href="http://alxcor.github.io/index.html">Home</a></li>
-  <li><a class="active" href="index.html">VirtualMCP</a></li>
-  <li><a href="download/virtualmcp.zip">Download</a></li>
-  <li><div class="dropdown">
-   <button class="dropbtn">Help for...</button>
-   <div class="dropdown-content">
-    <a href="#connection">Connection</a>
-    <a href="#more">More Settings</a>
-    </div>
-  </div>
-  </li>
-  <li class="right">
-    <a href="index_ro.html">Romana</a>
-  </li>
-</ul>
+<body>
+  <!-- START Header Area ... -->
+  <a name="#top"> </a>
+  <div class="logo1p" align="center">v23.01.28; Ian.2023</div>
+  <div class="logo2p" align="center"><b>Virtual MCP</b></div>
+  <div class="logo3p" align="center"><b>help</b></div>
+  <!-- END Header Area ... -->
+  <!-- START Menu Bar ... -->
+  <section class="menu_bar">
+    <input id="menu_tog" type="checkbox" />
+    <label class='menu_ctn' for="menu_tog">
+      <div class='menu_btn'></div>
+    </label>
+    <ul class="menu_lst">
+      <li><a href="http://alxcor.github.io/index.html">Home</a></li>
+      <li><a href="index_ro.html">Romana</a></li>
+      <li class="active"><a href="http://github.com/alxcor/virtualmcp">Virtual MCP</a></li>
+      <li><a href="#connection">Connection</a></li>
+      <li><a href="#more">More Settings</a></li>
+    </ul>
+  </section>
 <!-- END Menu Bar ... -->
-<img alt="VirtualMCP" title="Screen Overview" src="images/mtr_head.png" style="width:100%; height:auto">
-<hr color="#004080" size="1">
+<!-- START Main Area ... -->
+<section class="elem_top">
+  <h1>Virtual MCP</h1>
+</section>
 <br>
-VirtualMCP is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D environment<br>
-<br>
-The program may be used to control a real Sinumerik when the actual MCP is not accessible or in a remote location.<br>
-<br>
-<br>
-<b>New:</b><br>
-<b>v20.05.26:</b> Correct some issues related to font size.<br>
-<b>v20.05.23:</b> MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.<br>
-<b>v20.05.14:</b> Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.<br>
-<br>
-<hr color="#004080" size="1">
-<a name="connection"><h2>Connection</h2></a>
-<div class="rand">
- <div class="coloana">
-  <img alt="Monitor5" title="Screen Overview" src="images/connection_0.png"><br>
- </div>
- <div class="coloana">
-  <b>PLC Address:</b> set here the TCP/IP address of the target system (Sinumerik system)<br><br>
-  <b>Rack:</b> Step7 rack of the CPU (usually Rack 0).<br><br>
-  <b>Slot:</b> Step7 slot of the CPU. <b>Slot 0 for S7-1500</b> or <b>Slot 2 for S7-300 series</b><br><br>
- </div>
-</div>
-  <b>Connect to a target system:</b> Click the <b>'Connect'</b> button.<br>
-<hr color="#004080" size="1">
-<a name="address"><h2>MCP I/O Addresses</h2></a>
-<div class="rand">
- <div class = "coloana">
- <img alt="Monitor5" title="Screen Overview" src="images/connection_1.png">
- </div>
- <div class="coloana">
- Settings for connection: MCP Input and Output addresses:<br><br>
- <b>MCP1: </b>I/O addresses of the first MCP.<br><br>
- <b>MCP2: </b>I/O addresses of the 2-nd MCP.<br><br>
- <b>Act.: </b>I/O addresses used by VirtualMCP. Editable fields.<br><br>
- </div>
-</div>
-For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Output board of the PLC. In a simplified view we may consider the keys, the Override switches and the 'Access Key' 'connected' to Inputs of the PLC and the LED's of the keys controlled bu PLC outputs.<br>
-In order to configure the MCP, the Manufacturer of the machine (OEM) has to define the number of panels used and the corresponding I/O addresses of the MCP boards by parameterize the FB1,DB7 call in the OB100.<br><br>
-On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7.<br>
-<br>
-<b>Note</b> It is not unusual for the OEM to use a DB area instead of Inputs and Outputs for the MCP, as in the image.<br><br>
-<hr color="#004080" size="1">
-<a name="read_only"><h2>Read Only Mode / Control Mode</h2></a>
-<div class="rand">
- <div class = "coloana">
- <img alt="Monitor5" title="Screen Overview" src="images/connection_1.png">
- </div>
- <div class="coloana">
- In 'Read-Only' mode, the program is reading the status of keys, override switches, LEDs, etc from the real system without altering the data.<br><br>
- You may activate the 'Control' Mode for keys by pressing (Click) the 'Read-Only / Control' button.<br>
- </div>
-</div>
-<hr color="#004080" size="1">
-<div class="rand">
- <div class="coloana">
-  <img alt="Save" src="images/button_save.png">
- </div>
- <div class="coloana" style="float:none">
-  Save settings with "Save" button
- </div>
-</div>
-<hr color="#004080" size="1">
-<a name="more"><h2>More settings</h2></a>
-When "Save" button is clicked, all settings are saved in "monitor.ini" file located in the same folder as the Exe File.<br>
-All settings may be altered in this file and will be activated when the program is started.<br><br>
-<br>
-<b>[display]</b> <i>;Various settings for display</i><br>
-<b>language=</b>0 <i>;0 = Romana; 1 = English</i><br>
-<b>stayontop=</b>0 <i>;0 = Stay on Top deactivated; 1 = Stay on Top activated</i><br>
-<b>displ_time=</b>50 <i>;Screen refresh every 50ms</i><br>
-<br><br>
-<b>[connection]</b> <i>;Various settings for connection</i><br>
-<b>autoreconnect=</b>false <i>;When <b>true</b>: If connection is lost or not possible, the software will try again until a connection is done</i><br>
-<b>reconnect_time=</b>5 <i>;Number of seconds between two connection attempts</i><br>
-<br><br>
-<b>[server]</b> <i>;PLC CPU address</i><br>
-<b>address=</b>192.168.214.1 <i>;PLC CPU IP Adress</i><br>
-<b>rack=</b>0 <i>;PLC CPU Rack number, default 0</i><br>
-<b>slot=</b>2 <i>;PLC CPU Slot number, default 0 for S7-1500 or 2 for S7-300</i><br>
-<br><br>
-<b>[address]</b> <i> </i><br>
-<table><tbody>
-<tr><td><b>in_0_type=</b></td><td>I </td><td>;[I/Q/M/DB]</td><td><i>;Operand type for the first column: inputs</i></td></tr>
-<tr><td><b>in_0_dbno=</b></td><td>0 </td><td>;[number]</td><td><i>;DB number, for OperandType = DB</i></td></tr>
-<tr><td><b>in_0_addr=</b></td><td>0 </td><td>;[number]</td><td><i>;Byte number</i></td></tr>
+<section class="elem_lst">
+  <ul>
+    <li>
+      <h2>A Software MCP483/310 for Sinumerik</h2>
+      <p>
+      VirtualMCP is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D environment<br><br>
+      The program may be used to control a real Sinumerik when the actual MCP is not accessible or in a remote location.<br><br>
+      <br>
+      <b>Versions:</b><br>
+      <b>v23.01.24:</b> Added widget scalability.<br>
+      <b>v20.05.26:</b> Correct some issues related to font size.<br>
+      <b>v20.05.23:</b> MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.<br>
+      <b>v20.05.14:</b> Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.<br><br>
+      </p>
+    </li>
+    <li id="connection">
+      <h2>Connection</h2>
+      <img alt="Connection" title="Connection" src="images/connection_0.png"><br>
+      <p>
+        <b>PLC Address:</b> set here the TCP/IP address of the target system (Sinumerik system)<br><br>
+        <b>Rack:</b> Step7 rack of the CPU (usually Rack 0).<br><br>
+        <b>Slot:</b> Step7 slot of the CPU. <b>Slot 0 for S7-1500</b> or <b>Slot 2 for S7-300 series</b><br><br>
+        <b>Connect to a target system:</b> Click the <b>'Connect'</b> button.<br>
+      </p>
+    </li>
+    <li id="address">
+      <h2>MCP I/O Addresses</h2>
+      <img alt="Connection" title="Connection" src="images/connection_1.png"><br>
+      <p>
+        Settings for connection: MCP Input and Output addresses:<br><br>
+        <b>MCP1: </b>I/O addresses of the first MCP.<br><br>
+        <b>MCP2: </b>I/O addresses of the 2-nd MCP.<br><br>
+        <b>Act.: </b>I/O addresses used by VirtualMCP. Editable fields.<br><br>
+        For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Output board of the PLC. In a simplified view we may consider the keys, the Override switches and the 'Access Key' 'connected' to Inputs of the PLC and the LED's of the keys controlled bu PLC outputs.<br>
+        In order to configure the MCP, the Manufacturer of the machine (OEM) has to define the number of panels used and the corresponding I/O addresses of the MCP boards by parameterize the FB1,DB7 call in the OB100.<br><br>
+        On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7.<br><br>
+        <b>Note</b> It is not unusual for the OEM to use a DB area instead of Inputs and Outputs for the MCP, as in the image.<br><br>
+      </p>
+    </li>
+    <li id="read-only">
+      <h2>Read Only Mode / Control Mode</h2>
+      <img alt="Connection" title="Connection" src="images/connection_1.png"><br>
+      <p>
+        In 'Read-Only' mode, the program is reading the status of keys, override switches, LEDs, etc from the real system without altering the data.<br><br>
+        You may activate the 'Control' Mode for keys by pressing (Click) the 'Read-Only / Control' button.<br>
+      </p>
+    </li>
+    <li id="save">
+      <p>
+      <img alt="Connection" title="Connection" src="images/button_save.png">
+      Save settings with "Save" button<br>
+      </p>
+    </li>
+    <li id="more">
+      <h2>More Settings</h2>
+      <p>
+        When "Save" button is clicked, all settings are saved in "monitor.ini" file located in the same folder as the Exe File.<br>
+        All settings may be altered in this file and will be activated when the program is started.<br><br>
+        <br>
+      </p>
+      <p class="mono">
+        <b>[display]</b> <i>;Various settings for display</i><br>
+        <b>language=</b>0 <i>;0 = Romana; 1 = English</i><br>
+        <b>stayontop=</b>0 <i>;0 = Stay on Top deactivated; 1 = Stay on Top activated</i><br>
+        <b>displ_time=</b>50 <i>;Screen refresh every 50ms</i><br>
+        <br><br>
+        <b>[connection]</b> <i>;Various settings for connection</i><br>
+        <b>autoreconnect=</b>false <i>;When <b>true</b>: If connection is lost or not possible, the software will try again until a connection is done</i><br>
+        <b>reconnect_time=</b>5 <i>;Number of seconds between two connection attempts</i><br>
+        <br><br>
+        <b>[server]</b> <i>;PLC CPU address</i><br>
+        <b>address=</b>192.168.214.1 <i>;PLC CPU IP Adress</i><br>
+        <b>rack=</b>0 <i>;PLC CPU Rack number, default 0</i><br>
+        <b>slot=</b>2 <i>;PLC CPU Slot number, default 0 for S7-1500 or 2 for S7-300</i><br>
+        <br><br>
+        <b>[address]</b> <i> </i><br>
+        <table><tbody>
+          <tr><td><b>in_0_type=</b></td><td>I </td><td>;[I/Q/M/DB]</td><td><i>;Operand type for the first column: inputs</i></td></tr>
+          <tr><td><b>in_0_dbno=</b></td><td>0 </td><td>;[number]</td><td><i>;DB number, for OperandType = DB</i></td></tr>
+          <tr><td><b>in_0_addr=</b></td><td>0 </td><td>;[number]</td><td><i>;Byte number</i></td></tr>
+          <tr><td><b>out_0_type=</b></td><td>Q </td><td>;[I/Q/M/DB]</td><td><i>;Operand type for the 2nd column: outputs</i></td></tr>
+          <tr><td><b>out_0_dbno=</b></td><td>0 </td><td>;[number]</td><td><i>;DB number, for OperandType = DB</i></td></tr>
+          <tr><td><b>out_0_addr=</b></td><td>0 </td><td>;[number]</td><td><i>;Byte number</i></td></tr>
+        </tbody></table>
+      </p>
+    </li>
+    <li>
+      <p>
+        Project build on Qt5, using Snap7 (by Davide Nardella).
+      </p>
+    </li>
+  </ul>
 
-<tr><td><b>out_0_type=</b></td><td>Q </td><td>;[I/Q/M/DB]</td><td><i>;Operand type for the 2nd column: outputs</i></td></tr>
-<tr><td><b>out_0_dbno=</b></td><td>0 </td><td>;[number]</td><td><i>;DB number, for OperandType = DB</i></td></tr>
-<tr><td><b>out_0_addr=</b></td><td>0 </td><td>;[number]</td><td><i>;Byte number</i></td></tr>
 
-</tbody></table>
-<br><br>
-
-<hr color="#004080" size="2">
+</section>
+<!-- END Main Area ... -->
+<section class="footer">
+  alxcor@yahoo.com
+</section>
 </body></html>
