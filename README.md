@@ -13,12 +13,6 @@ web page:  [alxcor.github.io/virtualmcp](https://alxcor.github.io/virtualmcp).
 
 The program may be used to control a real Sinumerik when the actual MCP is not accessible or in a remote location.
 
-Versions:
-- v23.01.24: Added widget scalability.
-- v20.05.26: Correct some issues related to font size.
-- v20.05.23: MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.
-- v20.05.14: Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.
-
 ## Connection
 
 ![Connection](/docs/images/connection_0.png)
@@ -95,5 +89,11 @@ out_0_addr=0 ;[number]   ;Byte number
 
 ```
 
-Project build on Qt5, using Snap7 (by Davide Nardella).
+Versions:
+- v23.01.24: Added widget scalability.
+- v20.05.26: Correct some issues related to font size.
+- v20.05.23: MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.
+- v20.05.14: Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.
+
+*Project build on Qt5, using Snap7 (by Davide Nardella).*
 
