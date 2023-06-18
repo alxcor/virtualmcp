@@ -95,5 +95,5 @@ Versions:
 - v20.05.23: MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.
 - v20.05.14: Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.
 
-*Project build on Qt5, using Snap7 (by Davide Nardella).*
+*Project build on Qt5, using Snap7.*
 
