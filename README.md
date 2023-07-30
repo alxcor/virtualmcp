@@ -17,9 +17,11 @@ The program may be used to control a real Sinumerik when the actual MCP is not a
 
 ![Connection](/docs/images/connection_0.png)
 
+*For actual version: connection possible only via TCP/IP*
+
 - **PLC Address:** set here the TCP/IP address of the target system (Sinumerik system)
 - **Rack:** Step7 rack of the CPU (usually Rack 0).
-- **Slot:** Step7 slot of the CPU. **Slot 0 for S7-1500** or **Slot 2 for S7-300 series**
+- **Slot:** Step7 slot of the CPU. **Slot 2** for **Sinumerik 840Dsl series with S7-300 series PLC** or **Slot 1** for **Sinumerik ONE with S7-1500 series PLC.Slot 0 for S7-1500**
 
 **Connect to a target system:** Click the **'Connect'** button.
 
@@ -37,7 +39,7 @@ For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Outp
 
 In order to configure the MCP, the Manufacturer of the machine (OEM) has to define the number of panels used and the corresponding I/O addresses of the MCP boards by parameterize the FB1,DB7 call in the OB100.
 
-On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7.
+On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7. If Act. addresses do not correspond either to MCP panel 1 or MCP panel 2 addresses, the program remains in READ-ONLY mode.
 
 **Note** It is not unusual for the OEM to use a DB area instead of Inputs and Outputs for the MCP, as in the image.
 

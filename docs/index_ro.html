@@ -177,9 +177,10 @@
       <h2>Conectare</h2>
       <img alt="Connection" title="Connection" src="images/connection_0.png"><br>
       <p>
-        <b>Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati (Step7-PLC sau actionare Sinamics Drive)<br><br>
-        <b>Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
-        <b>Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 0 pentru seria S7-1500</b> sau <b>Slot 2 pentru seria S7-300</b><br><br>
+        <i>For actual version: connection possible only via TCP/IP</i><br><br>
+        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati (Step7-PLC sau actionare Sinamics Drive)<br><br>
+        <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
+        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dsl series cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
         <b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
       </p>
     </li>
@@ -193,7 +194,7 @@
         <b>Act.:</b>Adresele I/O setate pentru VirtualMCP. Campurile sunt editabile.<br><br>
         Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.<br>
         Pentru a configura modulele MCP, fabricantul masinii unelte (OEM) trebuie sa defineasca numarul de panouri MCP folosite si adresele I/O corespunzatoare acestora prin parametrizarea apelului functiei FB1,DB7 din blocul OB100.<br><br>
-        La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora.<br>
+        La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora. Daca adresele setate nu corespund nici adreselor detectate pentru MCP1 nuci adreselor detectate pentru MCP2, programul ramane in modul READ-ONLY.<br><br>
         <b>Nota</b> In unele cazuri fabricantul instalatiei (OEM) prefera utilizarea unor adrese dintr-un bloc DB in locul Intrarilor si Iesirilor, precum in imagine. Acest mod de adresare pare ciudat dar este inca utilizat de catre OEM.<br><br>
       </p>
     </li>

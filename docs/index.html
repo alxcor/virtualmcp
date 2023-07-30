@@ -177,9 +177,10 @@
       <h2>Connection</h2>
       <img alt="Connection" title="Connection" src="images/connection_0.png"><br>
       <p>
-        <b>PLC Address:</b> set here the TCP/IP address of the target system (Sinumerik system)<br><br>
-        <b>Rack:</b> Step7 rack of the CPU (usually Rack 0).<br><br>
-        <b>Slot:</b> Step7 slot of the CPU. <b>Slot 0 for S7-1500</b> or <b>Slot 2 for S7-300 series</b><br><br>
+        <i>For actual version: connection possible only via TCP/IP</i><br><br>
+        <b>- PLC Address:</b> set here the TCP/IP address of the target system (Sinumerik system)<br><br>
+        <b>- Rack:</b> Step7 rack of the CPU (usually Rack 0).<br><br>
+        <b>- Slot:</b> Step7 slot of the CPU. <b>Slot 2</b> for <b>Sinumerik 840Dsl series with S7-300 series PLC</b> or <b>Slot 1</b> for <b>Sinumerik ONE with S7-1500 series PLC.</b><br><br>
         <b>Connect to a target system:</b> Click the <b>'Connect'</b> button.<br>
       </p>
     </li>
@@ -191,9 +192,9 @@
         <b>MCP1: </b>I/O addresses of the first MCP.<br><br>
         <b>MCP2: </b>I/O addresses of the 2-nd MCP.<br><br>
         <b>Act.: </b>I/O addresses used by VirtualMCP. Editable fields.<br><br>
-        For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Output board of the PLC. In a simplified view we may consider the keys, the Override switches and the 'Access Key' 'connected' to Inputs of the PLC and the LED's of the keys controlled bu PLC outputs.<br>
+        For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Output board of the PLC. In a simplified view we may consider the keys, the Override switches and the 'Access Key' 'connected' to Inputs of the PLC and the LED's of the keys controlled bu PLC outputs.<br><br>
         In order to configure the MCP, the Manufacturer of the machine (OEM) has to define the number of panels used and the corresponding I/O addresses of the MCP boards by parameterize the FB1,DB7 call in the OB100.<br><br>
-        On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7.<br><br>
+        On each connection to the PLC, VirtualMCP program set itself in 'Read-Only' Mode, then reads the number of MCP's and the pointers to the first Input and Output address of the MCP from the DB7. If Act. addresses do not correspond either to MCP panel 1 or MCP panel 2 addresses, the program remains in READ-ONLY mode.<br><br>
         <b>Note</b> It is not unusual for the OEM to use a DB area instead of Inputs and Outputs for the MCP, as in the image.<br><br>
       </p>
     </li>
