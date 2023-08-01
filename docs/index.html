@@ -190,7 +190,7 @@
       <p>
         Settings for connection: MCP Input and Output addresses:<br><br>
         <b>MCP1: </b>I/O addresses of the first MCP.<br><br>
-        <b>MCP2: </b>I/O addresses of the 2-nd MCP.<br><br>
+        <b>MCP2: </b>I/O addresses of the 2nd MCP.<br><br>
         <b>Act.: </b>I/O addresses used by VirtualMCP. Editable fields.<br><br>
         For a Sinumerik CNC, the Machine Control Panel (MCP) is considered an Input/Output board of the PLC. In a simplified view we may consider the keys, the Override switches and the 'Access Key' 'connected' to Inputs of the PLC and the LED's of the keys controlled bu PLC outputs.<br><br>
         In order to configure the MCP, the Manufacturer of the machine (OEM) has to define the number of panels used and the corresponding I/O addresses of the MCP boards by parameterize the FB1,DB7 call in the OB100.<br><br>
@@ -230,7 +230,7 @@
         <b>reconnect_time=</b>5 <i>;Number of seconds between two connection attempts</i><br>
         <br><br>
         <b>[server]</b> <i>;PLC CPU address</i><br>
-        <b>address=</b>192.168.214.1 <i>;PLC CPU IP Adress</i><br>
+        <b>address=</b>192.168.214.1 <i>;PLC CPU IP Address</i><br>
         <b>rack=</b>0 <i>;PLC CPU Rack number, default 0</i><br>
         <b>slot=</b>2 <i>;PLC CPU Slot number, default 0 for S7-1500 or 2 for S7-300</i><br>
         <br><br>
@@ -253,7 +253,8 @@
         <b>v20.05.23:</b> MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.<br>
         <b>v20.05.14:</b> Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.<br>
         <br>
-        <i>Project build on Qt5, using Snap7 (by Davide Nardella).</i>
+        <i>- The project uses Snap7 under LGPL3 License to communicate with the Sinumerik/Sinamics/Step7 equipment.<br>
+        - The project uses Qt under LGPL3 License.</i>
       </p>
     </li>
   </ul>

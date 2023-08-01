@@ -56,7 +56,7 @@ You may activate the 'Control' Mode for keys by pressing (Click) the 'Read-Only 
 
 ![Connection](/docs/images/button_save.png)
 
-Save settings with "Save" button<br>
+Save settings with "Save" button
 
 ## More Settings
 
@@ -76,7 +76,7 @@ autoreconnect=false      ;When true: If connection is lost or not possible, the 
 reconnect_time=5         ;Number of seconds between two connection attempts
 
 [server]                 ;PLC CPU address
-address=192.168.214.1    ;PLC CPU IP Adress
+address=192.168.214.1    ;PLC CPU IP Address
 rack=0                   ;PLC CPU Rack number, default 0
 slot=2                   ;PLC CPU Slot number, default 0 for S7-1500 or 2 for S7-300
 
@@ -97,5 +97,6 @@ Versions:
 - v20.05.23: MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.
 - v20.05.14: Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.
 
-*Project build on Qt5, using Snap7.*
+*- The project uses Snap7 under LGPL3 License to communicate with the Sinumerik/Sinamics/Step7 equipment.*
+*- The project uses Qt under LGPL3 License.*
 
