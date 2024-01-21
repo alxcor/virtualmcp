@@ -125,6 +125,14 @@
         padding: 0.5rem 0; width: 100%; color: white;
         background-color: #10102F;}
     }
+    .darkmode {
+      @media (prefers-color-scheme: light) {
+        color: #FFFFFF; background-color: #000000;
+      }
+      @media (prefers-color-scheme: dark) {
+        color: #000000; background-color: #FFFFFF;
+      }
+    }
     @media (prefers-color-scheme: light) {
       body {color: #000000; background-color: #FFFFFF;}
     }
@@ -137,7 +145,7 @@
 <body>
   <!-- START Header Area ... -->
   <a name="#top"> </a>
-  <div class="logo1p" align="center">v23.01.28; Ian.2023</div>
+  <div class="logo1p" align="center">v24.01.21; Ian.2024</div>
   <div class="logo2p" align="center"><b>Virtual MCP</b></div>
   <div class="logo3p" align="center"><b>help</b></div>
   <!-- END Header Area ... -->
@@ -148,9 +156,10 @@
       <div class='menu_btn'></div>
     </label>
     <ul class="menu_lst">
-      <li><a href="http://alxcor.github.io/index.html">Home</a></li>
-      <li><a href="index_ro.html">Romana</a></li>
-      <li class="active"><a href="http://github.com/alxcor/virtualmcp">Virtual MCP</a></li>
+      <li><a href="http://alxcor.github.io/index.html" style="padding: 4px;"><img src="images/ico_home.png" alt="Home" width="35" height="35"></a></li>
+      <li><a href="index_ro.html" style="padding: 4px;"><img src="images/ico_lang.png" alt="Romana" width="35" height="35"></a></li>
+      <li><a style="padding: 4px;"><img src="images/ico_dark.png" alt="Light/Dark" width="35" height="35" onclick="changetodark()"></a></li>
+      <li><a href="http://github.com/alxcor/virtualmcp">Github</a></li>
       <li><a href="#connection">Connection</a></li>
       <li><a href="#more">More Settings</a></li>
     </ul>
@@ -253,8 +262,11 @@
         <b>v20.05.23:</b> MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.<br>
         <b>v20.05.14:</b> Simulate MCP483, MCP310; selection of 'Read-Only' or 'Control Keys' sau 'Control Keys and Override'.<br>
         <br>
-        <i>- The project uses Snap7 under LGPL3 License to communicate with the Sinumerik/Sinamics/Step7 equipment.<br>
-        - The project uses Qt under LGPL3 License.</i>
+        <i>
+        'VirtualMCP' is using <a href="https://www.qt.io">Qt</a> under <a href="http://www.gnu.org/licenses/lgpl-3.0.html"> LGPL3 License</a>.<br>
+        'VirtualMCP' is using Snap7 under <a href="http://www.gnu.org/licenses/lgpl-3.0.html">LGPL3 License</a> to communicate with the Sinumerik/Sinamics/Step7 equipment.<br>
+        The project may also use ProDave interface if the DLL file is provided by user and a license is activated.
+        </i>
       </p>
     </li>
   </ul>
@@ -265,4 +277,10 @@
 <section class="footer">
   alxcor@yahoo.com
 </section>
+<script>
+  function changetodark() {
+    var element = document.body;
+    element.classList.toggle("darkmode");
+  }
+</script>
 </body></html>

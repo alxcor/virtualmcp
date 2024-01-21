@@ -125,6 +125,14 @@
         padding: 0.5rem 0; width: 100%; color: white;
         background-color: #10102F;}
     }
+    .darkmode {
+      @media (prefers-color-scheme: light) {
+        color: #FFFFFF; background-color: #000000;
+      }
+      @media (prefers-color-scheme: dark) {
+        color: #000000; background-color: #FFFFFF;
+      }
+    }
     @media (prefers-color-scheme: light) {
       body {color: #000000; background-color: #FFFFFF;}
     }
@@ -137,7 +145,7 @@
 <body>
   <!-- START Header Area ... -->
   <a name="#top"> </a>
-  <div class="logo1p" align="center">v23.01.28; Ian.2023</div>
+  <div class="logo1p" align="center">v24.01.21; Ian.2024</div>
   <div class="logo2p" align="center"><b>Virtual MCP</b></div>
   <div class="logo3p" align="center"><b>ajutor</b></div>
   <!-- END Header Area ... -->
@@ -148,11 +156,13 @@
       <div class='menu_btn'></div>
     </label>
     <ul class="menu_lst">
-      <li><a href="http://alxcor.github.io/index_ro.html">Home</a></li>
+      <li><a href="http://alxcor.github.io/index.html" style="padding: 4px;"><img src="images/ico_home.png" alt="Acasa" width="35" height="35"></a></li>
+      <li><a href="index.html" style="padding: 4px;"><img src="images/ico_lang.png" alt="English" width="35" height="35"></a></li>
+      <li><a style="padding: 4px;"><img src="images/ico_dark.png" alt="Fundal" width="35" height="35" onclick="changetodark()"></a></li>
       <li><a href="index.html">English</a></li>
-      <li class="active"><a href="http://github.com/alxcor/virtualmcp">Virtual MCP</a></li>
+      <li><a href="http://github.com/alxcor/virtualmcp">Github</a></li>
       <li><a href="#connection">Conectare</a></li>
-      <li><a href="#more">Alte Setari</a></li>
+      <li><a href="#more">Alte Setări</a></li>
     </ul>
   </section>
 <!-- END Menu Bar ... -->
@@ -253,7 +263,11 @@
         <b>v20.05.23:</b> La conectare sunt citite setarile pentru MCP din echipamentul real: numarul de module MCP si adresele acestora.<br>
         <b>v20.05.14:</b> Simulare pentru MCP483, MCP310, posibilitatea de a seta 'Read-Only' sau 'Control Taste' sau 'Control Taste si Override'.<br>
         <br>
-        <i>Proiect dezvoltat in Qt5, folosind Snap7 (de Davide Nardella).</i>
+        <i>
+        'VirtualMCP' utilizeaza <a href="https://www.qt.io">Qt</a> sub <a href="http://www.gnu.org/licenses/lgpl-3.0.html">Licenta LGPL3</a>.<br>
+        'VirtualMCP' utilizeaza Snap7 sub <a href="http://www.gnu.org/licenses/lgpl-3.0.html">Licenta LGPL3</a> pentru a stabili comunicatia cu echipamentul Sinumerik/Sinamics/Step7.<br>
+        Proiectul poate utiliza si interfata Prodave daca fisierul DLL este copiat in directorul de lucru si licenta acestuia este activata.
+        </i>
       </p>
     </li>
   </ul>
@@ -262,4 +276,10 @@
 <section class="footer">
   alxcor@yahoo.com
 </section>
+<script>
+  function changetodark() {
+    var element = document.body;
+    element.classList.toggle("darkmode");
+  }
+</script>
 </body></html>
