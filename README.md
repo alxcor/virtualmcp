@@ -11,15 +11,14 @@ web page:  [alxcor.github.io/virtualmcp](https://alxcor.github.io/virtualmcp).
 
 **VirtualMCP** is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D environment.
 
-The program may be used to control a real Sinumerik when the actual MCP is not accessible or in a remote location.
+The program may be used to remote control a real Sinumerik when the actual MCP is not accessible or is in a remote location.
 
 ## Connection
 
 ![Connection](/docs/images/connection_0.png)
 
-*For actual version: connection possible only via TCP/IP*
 
-- **PLC Address:** set here the TCP/IP address of the target system (Sinumerik system)
+- **PLC Address:** set here the TCP/IP address (or MPI / Profibus address if using Prodave) of the target system (Sinumerik system)
 - **Rack:** Step7 rack of the CPU (usually Rack 0).
 - **Slot:** Step7 slot of the CPU. **Slot 2** for **Sinumerik 840Dsl series with S7-300 series PLC** or **Slot 1** for **Sinumerik ONE with S7-1500 series PLC.Slot 0 for S7-1500**
 
@@ -92,6 +91,7 @@ out_0_addr=0 ;[number]   ;Byte number
 ```
 
 Versions:
+- v24.09.14: ProDave connectivity: MPI, Profibus DP, Ethernet.
 - v23.01.24: Added widget scalability.
 - v20.05.26: Correct some issues related to font size.
 - v20.05.23: MCP Settings (number of MCP modules and MCP addresses) are read from online system on connection.
@@ -99,4 +99,5 @@ Versions:
 
 *- The project uses Snap7 under LGPL3 License to communicate with the Sinumerik/Sinamics/Step7 equipment.*
 *- The project uses Qt under LGPL3 License.*
+*- The project may also use ProDave interface if the DLL file is provided by user and a license is activated.*
 
