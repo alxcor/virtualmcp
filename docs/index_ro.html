@@ -145,7 +145,7 @@
 <body>
   <!-- START Header Area ... -->
   <a name="#top"> </a>
-  <div class="logo1p" align="center">v24.09.14; Sep.2024</div>
+  <div class="logo1p" align="center">v24.11.23; Nov.2024</div>
   <div class="logo2p" align="center"><b>Virtual MCP</b></div>
   <div class="logo3p" align="center"><b>ajutor</b></div>
   <!-- END Header Area ... -->
@@ -176,18 +176,24 @@
     <li>
       <h2>Un MCP483/310 software pentru Sinumerik</h2>
       <p>
-      VirtualMCP este un mic program ce emuleaza comportamentul unui panou de control SINUMERIK de tip MCP483 sau MCP310 atunci cand este conectat la un echipament SINUMERIK 840D.<br><br>
+      VirtualMCP este un mic program ce emuleaza comportamentul unui panou de control SINUMERIK de tip MCP483 sau MCP310 atunci cand este conectat la un echipament SINUMERIK 840D sau SINUMERIK ONE.<br><br>
       Programul poate fi utilizat pentru controlul la distanta a unui echipament real, atunci cand panoul MCP real este inaccesibil sau greu accesibil pentru utilizator.<br><br>
       <br>
       <a href="https://github.com/alxcor/virtualmcp/releases/download/v23.01.24/virtualmcp.zip" download>Download ...</a>
       <a href="http://github.com/alxcor/virtualmcp">Goto GitHub</a>
       </p>
     </li>
+    <li id="install">
+      <h2>Instalare</h2>
+      <p>
+        Descarcati si dezarhivati arhiva cu programul.<br><br>
+        Toate setarile sunt salvate in fisierul virtualmcp.ini, aflat in acelasi director/folder.<br>
+      </p>
+    </li>
     <li id="connection">
       <h2>Conectare</h2>
       <img alt="Connection" title="Connection" src="images/connection_0.png"><br>
       <p>
-        <i>For actual version: connection possible only via TCP/IP</i><br><br>
         <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati (Step7-PLC sau actionare Sinamics Drive)<br><br>
         <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
         <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dsl series cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
@@ -258,6 +264,7 @@
     <li>
       <p>
         <b>Versiuni:</b><br>
+        <b>v24.11.23:</b> Adaugare optiune de schimbare rapida intre 2 setari MCP diferite. Trecere la Qt 5.12.9<br>
         <b>v24.09.14:</b> Conectivitate prin ProDave: MPI, Profibus DP, Ethernet.<br>
         <b>v23.01.24:</b> Scalare la dimensiunea ferestrei.<br>
         <b>v20.05.26:</b> Corectat unele probleme legate de dimensiunea fonturilor.<br>

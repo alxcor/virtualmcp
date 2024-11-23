@@ -1,6 +1,6 @@
 # VirtualMCP
 
-**VirtualMCP** is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D environment
+**VirtualMCP** is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D or a Sinumerik One environment.
 
 ![header](/docs/images/header.png)
 
@@ -9,13 +9,15 @@ web page:  [alxcor.github.io/virtualmcp](https://alxcor.github.io/virtualmcp).
 ## VirtualMCP
 ### Simulator for MCP483 or MCP310 (Control Panels for Sinumerik 840D series CNC)
 
-**VirtualMCP** is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D environment.
+**VirtualMCP** is a small utility program able to simulate a real MCP483 or MCP310 in a Sinumerik 840D or a Sinumerik One environment.
 
 The program may be used to remote control a real Sinumerik when the actual MCP is not accessible or is in a remote location.
 
 ## Connection
 
 ![Connection](/docs/images/connection_0.png)
+
+
 
 
 - **PLC Address:** set here the TCP/IP address (or MPI / Profibus address if using Prodave) of the target system (Sinumerik system)
