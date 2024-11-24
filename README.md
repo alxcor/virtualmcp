@@ -13,16 +13,40 @@ web page:  [alxcor.github.io/virtualmcp](https://alxcor.github.io/virtualmcp).
 
 The program may be used to remote control a real Sinumerik when the actual MCP is not accessible or is in a remote location.
 
+## Install
+
+Download the program archive and unzip it.
+
+All settings are saved in virtualmcp.ini located in the same folder.
+
 ## Connection
 
-![Connection](/docs/images/connection_0.png)
+![Connection](/docs/images/interf_tcp.png)
 
+Connection is possible via TCP/IP (in PG, OP or S7 modes) or via PRODAVE (in MPI/DP, TCP/IP or ISO modes).
 
+To use PRODAVE connectivity, a copy of Prodave6.dll library needs to be copied into VirtualMCP working folder.
 
+## Connection via TCP/IP
 
-- **PLC Address:** set here the TCP/IP address (or MPI / Profibus address if using Prodave) of the target system (Sinumerik system)
+- **PLC Address:** set here the TCP/IP address of the target system (Sinumerik system)
 - **Rack:** Step7 rack of the CPU (usually Rack 0).
-- **Slot:** Step7 slot of the CPU. **Slot 2** for **Sinumerik 840Dsl series with S7-300 series PLC** or **Slot 1** for **Sinumerik ONE with S7-1500 series PLC.Slot 0 for S7-1500**
+- **Slot:** Step7 slot of the CPU. **Slot 2** for **Sinumerik 840Dsl series with S7-300 series PLC** or **Slot 1** for **Sinumerik ONE with S7-1500 series PLC. Slot 0 for S7-1500**
+
+**Connect to a target system:** Click the **'Connect'** button.
+
+## Connection via PRODAVE
+![Connection](/docs/images/interf_mpi.png)
+
+- **Mode:**
+-- **MPI/DP:** connection via MPI interface (e.g. Sinumerik 840D PowerLine: X127: MPI, 187.5k, PLC address = 2) or OPI interface (X101: MPI, 1.5M, PLC address = 13).
+-- **TCP/IP:** connection via Ethernet interface (e.g. Sinumerik 840D SolutionLine or ONE).
+
+- **Sett.:** Open the "Set PC/PG Interface" menu (to set Step7 connection interface settings).
+
+- **PLC Address:** set here the PLC address of the target system (Sinumerik system)
+- **Rack:** Step7 rack of the CPU (usually Rack 0).
+- **Slot:** Step7 slot of the CPU. **Slot 2** for **Sinumerik 840Dsl series with S7-300 series PLC** or **Slot 1** for **Sinumerik ONE with S7-1500 series PLC.**
 
 **Connect to a target system:** Click the **'Connect'** button.
 
