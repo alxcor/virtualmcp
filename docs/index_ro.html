@@ -192,11 +192,32 @@
     </li>
     <li id="connection">
       <h2>Conectare</h2>
-      <img alt="Connection" title="Connection" src="images/connection_0.png"><br>
+      <img alt="Connection" title="Connection" src="images/interf.png"><br>
       <p>
-        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati (Step7-PLC sau actionare Sinamics Drive)<br><br>
+        Conectarea este posibila prin TCP/IP (in mod PG, OP sau S7) sau prin PRODAVE (in mod MPI/DP, TCP/IP sau ISO).<br><br>
+        Pentru a putea utiliza PRODAVE, o copie a bibliotecii Prodave6.dll trebuie copiata in directorul din care ruleaza VirtualMCP.<br><br>
+      </p>
+    </li>
+    <li id="connection1">
+      <h2>Conectare prin TCP/IP</h2>
+      <img alt="Connection" title="Connection" src="images/interf_tcp.png"><br>
+      <p>
+        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati<br><br>
         <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
-        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dsl series cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
+        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dsl cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
+        <b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
+      </p>
+    </li>
+    <li id="connection2">
+      <h2>Conectare prin PRODAVE</h2>
+      <img alt="Connection" title="Connection" src="images/interf_mpi.png"><br>
+      <p>
+        <b>- Mod MPI/DP:</b> conectare prin interfata MPI (de ex. Sinumerik 840D PowerLine: X127: MPI, 187.5k, adresa PLC = 2) sau interfata OPI (X101: MPI, 1.5M, adresa PLC = 13).<br>
+        <b>- Mod TCP/IP:</b> conectare prin interfata Ethernet (de ex. Sinumerik 840D SolutionLine sau ONE).<br><br>
+        <b>- Sett.:</b> Deschide meniul "Set PC/PG Interface" (pentru setarea interfetei de conectare Step7).<br><br>
+        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati<br><br>
+        <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
+        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dpl sau 840Dsl cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
         <b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
       </p>
     </li>
@@ -208,7 +229,7 @@
         <b>MCP1:</b>Adresele I/O pentru primul MCP.<br><br>
         <b>MCP2:</b>Adresele I/O pentru al doilea MCP.<br><br>
         <b>Act.:</b>Adresele I/O setate pentru VirtualMCP. Campurile sunt editabile.<br><br>
-        Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.<br>
+        Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.<br><br>
         Pentru a configura modulele MCP, fabricantul masinii unelte (OEM) trebuie sa defineasca numarul de panouri MCP folosite si adresele I/O corespunzatoare acestora prin parametrizarea apelului functiei FB1,DB7 din blocul OB100.<br><br>
         La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora. Daca adresele setate nu corespund nici adreselor detectate pentru MCP1 nuci adreselor detectate pentru MCP2, programul ramane in modul READ-ONLY.<br><br>
         <b>Nota</b> In unele cazuri fabricantul instalatiei (OEM) prefera utilizarea unor adrese dintr-un bloc DB in locul Intrarilor si Iesirilor, precum in imagine. Acest mod de adresare pare ciudat dar este inca utilizat de catre OEM.<br><br>
