@@ -1,316 +1,526 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="Sinumerik online monitoring, Sinumerik 840D remote diagnosis, Sitrain simulator, Step7 scope monitoring, Totally Integrated Automation, MCP Machine Control Panel Simulation, Virtual MCP, Remote MCP, Virtual Machine Control Panel">
-<meta name="description" content="Virtual MCP for Sinumerik 840D Solution Line">
-<head><title>VirtualMCP Help</title>
-  <style>
-    /* Setari generale: chenar, fonturi, etc. */
-    * { box-sizing: border-box;}
-    body {color: #000000; background-color: #FFFFFF;}
-    body {font-family: Arial, sans-serif; font-size: 100%;}
-    h1 {font-family: Garamond, serif; font-size: 2.500rem;}
-    h2 {font-family: Garamond, serif; font-size: 1.875rem;}
-    h3 {font-family: Garamond, serif; font-size: 1.300rem;}
-    table {border-collapse: collapse;width: 100%;}
-    th {border: 1px solid #004080;}
-    td {border: 1px solid #004080;}
-    tr:nth-child(odd) {background-color: rgba(120, 120, 170, 0.4);}
-    /* Logo: data/versiune; titlu; subtitlu */
-    .logo1p {
-      margin-top: 5px; margin-left: 15px; margin-right: 10px;
-      font-family: Arial; font-size: 0.8rem; line-height: 10px;
-      text-align: right; color: #90909F; }
-    .logo2p { 
-      margin-top: 10px; margin-left: 15px; margin-right: 10px;
-      font-family: Arial; font-size: 3rem; line-height: 50px;
-      text-align: left; color: #303050; }
-    .logo3p {
-      margin-top: -20px; margin-left: 100px; margin-right: 10px;
-      font-family: Arial; font-size: 2.5rem; line-height: 35px;
-      text-align: left; color: #90909F; }
-    /* Bara meniu orizontal: setari fundal */
-    .menu_bar {
-      display: flex; flex-direction: row; align-items: center;
-      background-color: #303050;
-      background: linear-gradient(to left, #00000F, #505070);
-      color: #90909F; height: 50px; font-family: Arial;
-      position: sticky; top: 0;  padding: 0;}
-    /* Bara meniu orizontal: Menu Button Container */
-    .menu_ctn {
-      display: none; height: 100%; width: 60px; cursor: pointer;
-      flex-direction: column; justify-content: center;
-      align-items: center;}
-    /* Bara meniu orizontal: Menu Button */
-    .menu_btn, .menu_btn::before, .menu_btn::after {
-      display: block; background-color: #90909F; position: absolute;
-      height: 4px; width: 30px; border-radius: 2px;
-      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);}
-    .menu_btn::before { content: ''; margin-top: -8px;}
-    .menu_btn::after  { content: ''; margin-top:  8px;}
-    #menu_tog { display: none;}
-    #menu_tog:checked + .menu_ctn .menu_btn {
-      background: rgba(255, 255, 255, 0);}
-    #menu_tog:checked + .menu_ctn .menu_btn::before {
-      margin-top: 0px; transform: rotate(45deg);}
-    #menu_tog:checked + .menu_ctn .menu_btn::after {
-      margin-top: 0px; transform: rotate(-45deg);}
-    /* Bara meniu orizontal: lista orizontala */
-    .menu_lst {
-      display: flex; flex-direction: row; list-style-type: none;
-      margin: 0; padding: 0;}
-    /* Bara meniu orizontal: setari elemente lista li */
-    .menu_lst > li { margin: 0; overflow: hidden;}
-    .menu_lst li:hover { background:#404040;}
-    .menu_lst li.active {background-color: #6060A0;}
-    /* Bara meniu orizontal: setari aliniat li */
-    .menu_lst li a {
-      display: block; color: #F4F4FF; text-align: left;
-      padding: 14px; text-decoration: none; font-size: 1rem;}
-    .menu_lst li a:hover{ background-color: #404040;}
-    /* Element principal tip 1 */
-    .elem_top { background: url("images/header.png") center;
-      background-size: cover; padding: 0rem 2rem; padding-bottom: 10rem;
-      display: grid; align-items: center;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));}
-    .elem_top > * {color: white;}
-    .elem_top > h1 {font-size: 3rem; padding-bottom: 0.5rem;
-      background-color: rgba(0,0,0,0.5); color: #F0F0FF;}
-    /* Element principal tip 2 */
-    .elem_tos { padding: 0rem; margin: 0rem;}
-    .elem_tos > figure {height: 340px; overflow: hidden; margin:0rem;}
-    /* Element lista 2*/
-    .elem_lst {padding: 0.2rem; margin 0.2rem;}
-    .elem_lst > ul {
-      list-style-type: none; display: list-item; grid-gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      padding: 0.2rem;}
-    .elem_lst > ul > li {border: 0px solid #90909F; border-bottom: 1px solid #90909F;}
-    .elem_lst > ul > li > figure {
-      height: 200px; overflow: hidden; margin:0.1rem;}
-    .elem_lst > ul > li > figure > img {width: 100%;}
-    .elem_lst > ul > li > figure > figcaption {
-      position: absolute; bottom: 0;
-      background-color: rgba(0,0,0,0.7); width: 100%;}
-    .elem_lst > ul > li > figure > figcaption > h3 {
-      color: white; padding: .75rem; font-size: 1.25rem;}
-    .elem_lst > ul > li > p {
-      font-size: 1rem; line-height: 1.1rem; padding: 0.2rem 0.2rem;
-      <!--color: #90909F;-->}
-    .elem_lst > ul > li > p > a {
-      font-size: 0.8rem; line-height: 1; padding: 0.5rem;
-      background-color: 40404F; text-decoration: none;
-      color: FFFFFF; border-radius: .25rem;
-      text-align: center; display: inline-block;}
-    .mono {font-family: monospace; margin-left: 20px;}
-    .par1 {margin-left: 20px;}
-    .maxp {max-width: 100%;}
-    .footer {
-      background-color: #40404F; color: white; padding: .25rem;
-      text-align: right; font-size: .5rem;}
-    @media (max-width: 800px) {
-      .menu_ctn { display: flex;}
-      #menu_tog ~ .menu_lst li {
-        height: 0; margin: 0; padding: 0; border: 0;
-        transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);}
-      #menu_tog:checked ~ .menu_lst li {
-        border: 1px solid #30303F; height: 2.5rem;
-        transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);}
-      .menu_lst {
-        position: absolute; top: 0; margin-top: 50px; left: 0;
-        flex-direction: column; width: 100%;
-        justify-content: center; align-items: center;}
-      .menu_lst > li {
-        display: flex; justify-content: left; margin: 0;
-        padding: 0.5rem 0; width: 100%; color: white;
-        background-color: #10102F;}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Sinumerik online monitoring, Sinumerik 840D remote diagnosis, Sitrain simulator, Step7 scope monitoring, Totally Integrated Automation, MCP Machine Control Panel Simulation, Virtual MCP, Remote MCP, Virtual Machine Control Panel">
+    <meta name="description" content="Virtual MCP for Sinumerik ONE, 840D Solution Line, 840D PowerLine">
+    <title>VirtualMCP Ajutor</title>
+    <style>
+    html {
+        scroll-behavior: smooth;
     }
-    .darkmode {
-      @media (prefers-color-scheme: light) {
-        color: #FFFFFF; background-color: #000000;
-        table, td, th {color: #FFFFFF}
-      }
-      @media (prefers-color-scheme: dark) {
-        color: #000000; background-color: #FFFFFF;
-        table, td, th {color: #000000}
-      }
+    :root {
+        --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        --bg-app: #f5f6f8;
+        --bg-surface: #ffffff;
+        --bg-header:  #ffffff;
+        --bg-toolbar: #303050;
+        --bg-toolbar-grad: linear-gradient(to left, #00000F, #505070);
+        --text-main: #202124;
+        --text-muted: #5f6368;
+        --text-toolbar: #e3e3e3;
+        --border-color: #dadce0;
+        --accent-color: #1a73e8;
+        --hover-color: rgba(255, 255, 255, 0.15);
+        --table-color: #000000;
+        --table-bgcol: #ffffff;
     }
-    @media (prefers-color-scheme: light) {
-      body {color: #000000; background-color: #FFFFFF;}
+    body.dark {
+        --bg-app: #121212;
+        --bg-surface: #1e1e1e;
+        --bg-header:  #1e1e1e;
+        --text-main: #e3e3e3;
+        --text-muted: #9aa0a6;
+        --border-color: #3c4043;
+        --accent-color: #8ab4f8;
+        --table-color: #ffffff;
+        --table-bgcol: #1e1e1e;
     }
     @media (prefers-color-scheme: dark) {
-      body {color: #FFFFFF; background-color: #000000;}
+        body:not(.light) {
+            --bg-app: #121212;
+            --bg-surface: #1e1e1e;
+            --bg-header:  #1e1e1e;
+            --text-main: #e3e3e3;
+            --text-muted: #9aa0a6;
+            --border-color: #3c4043;
+            --accent-color: #8ab4f8;
+            --table-color: #ffffff;
+            --table-bgcol: #1e1e1e;
+        }
     }
-  </style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    body {
+        font-family: var(--font-stack);
+        background-color: var(--bg-app);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .app-header {
+        background-color: var(--bg-header);
+        border-bottom: 1px solid var(--border-color);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header-title-group {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+    .logo-main {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--accent-color);
+    }
+    .logo-sub {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: var(--text-muted);
+    }
+    .version-badge {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        padding: 4px 8px;
+        background: var(--hover-color);
+        border-radius: 4px;
+    }
+    .toolbar {
+        background: var(--bg-toolbar-grad);
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 6px 16px;
+        gap: 6px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+    .toolbar-group {
+        display: flex;
+        gap: 4px;
+    }
+    .toolbar a, .toolbar button {
+        background: transparent;
+        border: none;
+        border-radius: 4px;
+        color: var(--text-toolbar);
+        min-width: 32px;
+        height: 32px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+        padding: 4px 10px;
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+    .toolbar a:hover, .toolbar button:hover {
+        background-color: var(--hover-color);
+        text-decoration: none;
+    }
+    .toolbar a img, .toolbar button img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        pointer-events: none;
+    }
+    .toolbar .divider {
+        width: 1px;
+        height: 20px;
+        background-color: rgba(255, 255, 255, 0.2);
+        margin: 0 4px;
+    }
+    .tooltip {
+        position: relative;
+    }
+    .tooltip::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        top: 125%;
+        left: 50%;
+        transform: translateX(-50%) scale(0.85);
+        transform-origin: top center;
+        background-color: #212121;
+        color: #ffffff;
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        border-radius: 4px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        transition: opacity 0.15s ease, transform 0.15s ease;
+        z-index: 9999;
+    }
+    .tooltip:hover::after {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+    .hero-banner {
+        background: url("images/header.png") no-repeat top center;
+        background-size: cover;
+        min-height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        padding: 2rem;
+    }
+    .hero-text-box {
+        background-color: rgba(0, 0, 0, 0.65); 
+        padding: 1rem 2.5rem; 
+        border-radius: 2px; 
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+    }
+    .hero-text-box h2 {
+        color: #ffffff;
+        font-size: 2.5rem;
+        margin: 0;
+    }
+    .main-content {
+        max-width: 1400px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        flex: 1;
+    }
+    .apps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+    }
+    .card {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+        margin-bottom: 1rem;
+        border-bottom: 2px solid var(--border-color);
+        padding-top: 1.5rem;
+        padding-bottom: 0.5rem;
+        color: var(--accent-color);
+    }
+    .card h3 {
+        margin-bottom: 1rem;
+        color: var(--accent-color);
+    }
+    .card p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 1rem;
+    }
+    .btn {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+        color: #FFFFFF;
+        background-color: #40404F;
+        border-radius: 0.25rem;
+        display: inline-block;
+        transition: background-color 0.2s;
+    }
+    .btn:hover {
+        background-color: var(--accent-color);
+        text-decoration: none;
+    }
+    .media-block {
+        margin: 1.5rem 0;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid var(--border-color);
+    }
+    .media-block img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    .feature-list {
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .feature-list li {
+        padding: 0.75rem;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    pre {
+        background: rgba(0, 0, 0, 0.04);
+        border-left: 3px solid var(--accent-color);
+        padding: 12px;
+        border-radius: 4px;
+        margin: 1rem 0;
+        overflow-x: auto;
+    }
+    body.dark pre {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    code {
+        font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        font-size: 0.9rem;
+    }
+    .footer {
+        background-color: var(--bg-surface);
+        border-top: 1px solid var(--border-color);
+        padding: 12px 20px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-top: auto;
+    }
+    .help-section {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        padding: 6px 16px;
+        gap: 6px;
+    }
+    .help-section img {
+        max-width: 100%;
+        height: auto;
+    }
+    .feature-overview-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .overview-sub-card.media-block {
+        width: 100%;
+        max-width: 100%; 
+        margin: 0;
+    }
+    .overview-sub-card.media-block img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    @media (min-width: 500px) {
+        .feature-overview-container {
+            grid-template-columns: minmax(300px, max-content) 1fr;
+            align-items: start;
+        }
+       .apps-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           gap: 2rem;
+       }
+    }
+    </style>
 </head>
-<!-- START BODY ... -->
-<body>
-  <!-- START Header Area ... -->
-  <a name="#top"> </a>
-  <div class="logo1p" align="center">v24.11.23; Nov.2024</div>
-  <div class="logo2p" align="center"><b>Virtual MCP</b></div>
-  <div class="logo3p" align="center"><b>ajutor</b></div>
-  <!-- END Header Area ... -->
-  <!-- START Menu Bar ... -->
-  <section class="menu_bar">
-    <input id="menu_tog" type="checkbox" />
-    <label class='menu_ctn' for="menu_tog">
-      <div class='menu_btn'></div>
-    </label>
-    <ul class="menu_lst">
-      <li><a href="http://alxcor.github.io/index.html" style="padding: 4px;"><img src="images/ico_home.png" alt="Acasa" width="35" height="35"></a></li>
-      <li><a href="index.html" style="padding: 4px;"><img src="images/ico_lang.png" alt="English" width="35" height="35"></a></li>
-      <li><a style="padding: 4px;"><img src="images/ico_dark.png" alt="Fundal" width="35" height="35" onclick="changetodark()"></a></li>
-      <li><a href="index.html">English</a></li>
-      <li><a href="http://github.com/alxcor/virtualmcp">Github</a></li>
-      <li><a href="#connection">Conectare</a></li>
-      <li><a href="#more">Alte Setări</a></li>
-    </ul>
-  </section>
-<!-- END Menu Bar ... -->
-<!-- START Main Area ... -->
-<section class="elem_top">
-  <h1>Virtual MCP</h1>
-</section>
-<br>
-<section class="elem_lst">
-  <ul>
-    <li>
-      <h2>Un MCP483/310 software pentru Sinumerik</h2>
-      <p>
-      VirtualMCP este un mic program ce emuleaza comportamentul unui panou de control SINUMERIK de tip MCP483 sau MCP310 atunci cand este conectat la un echipament SINUMERIK 840D sau SINUMERIK ONE.<br><br>
-      Programul poate fi utilizat pentru controlul la distanta a unui echipament real, atunci cand panoul MCP real este inaccesibil sau greu accesibil pentru utilizator.<br><br>
-      <br>
-      <a href="https://github.com/alxcor/virtualmcp/releases/download/v23.01.24/virtualmcp.zip" download>Download ...</a>
-      <a href="http://github.com/alxcor/virtualmcp">Goto GitHub</a>
-      </p>
-    </li>
-    <li id="install">
-      <h2>Instalare</h2>
-      <p>
-        Descarcati si dezarhivati arhiva cu programul.<br><br>
-        Toate setarile sunt salvate in fisierul virtualmcp.ini, aflat in acelasi director/folder.<br>
-      </p>
-    </li>
-    <li id="connection">
-      <h2>Conectare</h2>
-      <img alt="Connection" title="Connection" src="images/interf.png"><br>
-      <p>
-        Conectarea este posibila prin TCP/IP (in mod PG, OP sau S7) sau prin PRODAVE (in mod MPI/DP, TCP/IP sau ISO).<br><br>
-        Pentru a putea utiliza PRODAVE, o copie a bibliotecii Prodave6.dll trebuie copiata in directorul din care ruleaza VirtualMCP.<br><br>
-      </p>
-    </li>
-    <li id="connection1">
-      <h2>Conectare prin TCP/IP</h2>
-      <img alt="Connection" title="Connection" src="images/interf_tcp.png"><br>
-      <p>
-        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati<br><br>
-        <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
-        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dsl cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
-        <b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
-      </p>
-    </li>
-    <li id="connection2">
-      <h2>Conectare prin PRODAVE</h2>
-      <img alt="Connection" title="Connection" src="images/interf_mpi.png"><br>
-      <p>
-        <b>- Mod MPI/DP:</b> conectare prin interfata MPI (de ex. Sinumerik 840D PowerLine: X127: MPI, 187.5k, adresa PLC = 2) sau interfata OPI (X101: MPI, 1.5M, adresa PLC = 13).<br>
-        <b>- Mod TCP/IP:</b> conectare prin interfata Ethernet (de ex. Sinumerik 840D SolutionLine sau ONE).<br><br>
-        <b>- Sett.:</b> Deschide meniul "Set PC/PG Interface" (pentru setarea interfetei de conectare Step7).<br><br>
-        <b>- Adresa PLC:</b> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati<br><br>
-        <b>- Rack:</b> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).<br><br>
-        <b>- Slot:</b> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <b>Slot 2</b> pentru <b>Sinumerik 840Dpl sau 840Dsl cu PLC din seria S7-300</b> sau <b>Slot 1</b> pentru <b>Sinumerik ONE cu PLC din seria S7-1500.</b><br><br>
-        <b>Conectare la un sistem 'tinta':</b> Dati 'Click' pe butonul <b>'Conectare'</b>.<br>
-      </p>
-    </li>
-    <li id="address">
-      <h2>Adrese MCP I/O</h2>
-      <img alt="Connection" title="Connection" src="images/connection_1.png"><br>
-      <p>
-        Setari pentru conexiune: Adrese Intrari si Iesiri MCP:<br><br>
-        <b>MCP1:</b>Adresele I/O pentru primul MCP.<br><br>
-        <b>MCP2:</b>Adresele I/O pentru al doilea MCP.<br><br>
-        <b>Act.:</b>Adresele I/O setate pentru VirtualMCP. Campurile sunt editabile.<br><br>
-        Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.<br><br>
-        Pentru a configura modulele MCP, fabricantul masinii unelte (OEM) trebuie sa defineasca numarul de panouri MCP folosite si adresele I/O corespunzatoare acestora prin parametrizarea apelului functiei FB1,DB7 din blocul OB100.<br><br>
-        La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora. Daca adresele setate nu corespund nici adreselor detectate pentru MCP1 nuci adreselor detectate pentru MCP2, programul ramane in modul READ-ONLY.<br><br>
-        <b>Nota</b> In unele cazuri fabricantul instalatiei (OEM) prefera utilizarea unor adrese dintr-un bloc DB in locul Intrarilor si Iesirilor, precum in imagine. Acest mod de adresare pare ciudat dar este inca utilizat de catre OEM.<br><br>
-      </p>
-    </li>
-    <li id="read-only">
-      <h2>Mod 'Read Only' / Mod 'Control'</h2>
-      <img alt="Connection" title="Connection" src="images/connection_1.png"><br>
-      <p>
-        In modul 'Read-Only', programul citeste starea tastelor, butoanelor de control avansuri (override), LED-urilor, etc de pe sistemul real fara sa modifice date. Apasarea unei taste in program nu infuenteaza starea sistemului real.<br><br>
-        Modul 'Control' poate fi activat prin apasarea butonului (Click) 'Read-Only / Control'.<br>
-      </p>
-    </li>
-    <li id="save">
-      <p>
-      <img alt="Connection" title="Connection" src="images/button_save.png">
-        Salvati setarile cu butonul "Save"<br>
-      </p>
-    </li>
-    <li id="more">
-      <h2>Alte setari</h2>
-      <p>
-        La apasarea butonului "Save", setarile sunt salvate in fisierul "monitor.ini" localizat in acelasi director/folder cu fisierul executabil.<br>
-        Toate setarile pot fi modificate in acest fisier si vor fi activate la pornirea/repornirea programului.<br><br>
-        <br>
-      </p>
-      <p class="mono">
-        <b>[display]</b> <i>;diverse setari referitoare la afisare</i><br>
-        <b>language=</b>0 <i>;0 = Romana; 1 = English</i><br>
-        <b>stayontop=</b>0 <i>;0 = Stay on Top dezactivat; 1 = Stay on Top activat</i><br>
-        <b>displ_time=</b>50 <i>;Afisare ecran la fiecare 50ms</i><br>
-        <br><br>
-        <b>[connection]</b> <i>;Diverse setari referitoare la conectare</i><br>
-        <b>autoreconnect=</b>false <i>;Cand valoarea este <b>true</b>: La pierderea conexiunii sau daca o cenexiune nu este posibila, programul va incerca din nou sa se conecteze pana cand o cenexiune este efectuata sau este apasat butonul 'Deconectare'</i><br>
-        <b>reconnect_time=</b>5 <i>;Numarul de secunde intre doua incercari de reconectare</i><br>
-        <br><br>
-        <b>[server]</b> <i>;Adresa unitatii CPU a PLC</i><br>
-        <b>address=</b>192.168.212.222 <i>;Adresa IP a PLC CPU</i><br>
-        <b>rack=</b>0 <i>;Numarul rack-ului pe care se afla PLC CPU, implicit 0</i><br>
-        <b>slot=</b>0 <i>; Numarul slotului pe care se afla PLC CPUr, implicit 0 pt S7-1500 sau 2 pt S7-300</i><br>
-        <br><br>
-        <b>[address]</b> <i>;Setari referitoare la adresele PLC </i><br>
-        <table><tbody>
-          <tr><td><b>in_0_type=</b></td><td>I</td><td>;[I/Q/M/DB]</td><td><i>;Tip operand pentru prima coloana: intrari</i></td></tr>
-          <tr><td><b>in_0_dbno=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar DB, daca tipul operandului este DB</i></td></tr>
-          <tr><td><b>in_0_addr=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar Byte</i></td></tr>
-          <tr><td><b>out_0_type=</b></td><td>Q</td><td>;[I/Q/M/DB]</td><td><i>;Tip operand pentru a 2-a coloana: iesiri</i></td></tr>
-          <tr><td><b>out_0_dbno=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar DB, daca tipul operandului este DB</i></td></tr>
-          <tr><td><b>out_0_addr=</b></td><td>0</td><td>;[numar]</td><td><i>;Numar Byte</i></td></tr>
-        </tbody></table>
-      </p>
-    </li>
-    <li>
-      <p>
-        <b>Versiuni:</b><br>
-        <b>v24.11.23:</b> Adaugare optiune de schimbare rapida intre 2 setari MCP diferite. Trecere la Qt 5.12.9<br>
-        <b>v24.09.14:</b> Conectivitate prin ProDave: MPI, Profibus DP, Ethernet.<br>
-        <b>v23.01.24:</b> Scalare la dimensiunea ferestrei.<br>
-        <b>v20.05.26:</b> Corectat unele probleme legate de dimensiunea fonturilor.<br>
-        <b>v20.05.23:</b> La conectare sunt citite setarile pentru MCP din echipamentul real: numarul de module MCP si adresele acestora.<br>
-        <b>v20.05.14:</b> Simulare pentru MCP483, MCP310, posibilitatea de a seta 'Read-Only' sau 'Control Taste' sau 'Control Taste si Override'.<br>
-        <br>
-        <i>
-        'VirtualMCP' utilizeaza <a href="https://www.qt.io">Qt</a> sub <a href="http://www.gnu.org/licenses/lgpl-3.0.html">Licenta LGPL3</a>.<br>
-        'VirtualMCP' utilizeaza Snap7 sub <a href="http://www.gnu.org/licenses/lgpl-3.0.html">Licenta LGPL3</a> pentru a stabili comunicatia cu echipamentul Sinumerik/Sinamics/Step7.<br>
-        Proiectul poate utiliza si interfata Prodave daca fisierul DLL este copiat in directorul de lucru si licenta acestuia este activata.
-        </i>
-      </p>
-    </li>
-  </ul>
-</section>
-<!-- END Main Area ... -->
-<section class="footer">
-  alxcor@yahoo.com
-</section>
-<script>
-  function changetodark() {
-    var element = document.body;
-    element.classList.toggle("darkmode");
-  }
-</script>
-</body></html>
+<body id="top">
+    <header class="app-header">
+        <div class="header-title-group">
+            <h1 class="logo-main">Virtual MCP</h1>
+            <h2 class="logo-sub">ajutor</h2>
+        </div>
+        <div class="version-badge">v24.11.23; Nov.2024</div>
+    </header>
+    <nav class="toolbar">
+        <div class="toolbar-group">
+            <a href="http://alxcor.github.io/index_ro.html" class="tooltip" data-tooltip="Acasa">
+                <img src="images/ico_home.png" alt="Acasa">
+            </a>
+            <a href="index.html" class="tooltip" data-tooltip="Language">
+                <img src="images/ico_lang.png" alt="Language">
+            </a>
+            <button id="bt_dark" type="button" class="tooltip" data-tooltip="Toggle Theme">
+                <img src="images/ico_dark.png" alt="Theme">
+            </button>
+        </div>
+        <div class="divider"></div>
+        <div class="toolbar-group">
+            <a href="http://github.com/alxcor/virtualmcp" target="_blank" class="tooltip" data-tooltip="GitHub Repository">Cod Sursa</a>
+        </div>
+        <div class="divider"></div>
+        <div class="toolbar-group">
+            <a href="#top">Top</a>
+        </div>
+        <div class="divider"></div>
+        <div class="toolbar-group">
+            <a href="#connect-section">Conectare</a>
+            <a href="#setting-section">Alte Setari</a>
+        </div>
+    </nav>
+    <section class="hero-banner">
+        <div class="hero-text-box">
+            <h2>Virtual MCP</h2>
+        </div>
+    </section>
+    <main class="main-content">
+        <section class="card">
+            <h2>MCP483/310 software pentru Sinumerik</h2>
+            <p><strong>Virtual MCP</strong> VirtualMCP este un mic program ce emuleaza comportamentul unui panou de control SINUMERIK de tip MCP483 sau MCP310 atunci cand este conectat la un echipament SINUMERIK 840D sau SINUMERIK ONE.</p>
+            <p>TProgramul poate fi utilizat pentru controlul la distanta a unui echipament real, atunci cand panoul MCP real este inaccesibil sau greu accesibil pentru utilizator.</p>
+            <div class="btn-group">
+                <a href="http://github.com/alxcor/virtualmcp" target="_blank" class="btn">Cod Sursa pe GitHub</a>
+                <a href="https://github.com/alxcor/virtualmcp/releases/download/v23.01.24/virtualmcp.zip" class="btn">Download v23.01.24</a>
+            </div>
+        </section>
+        <section class="card" id="install-section">
+            <h2>Instalare</h2>
+            <p>Descarcati si dezarhivati arhiva cu programul</p>
+            <p>Toate setarile sunt salvate in fisierul virtualmcp.ini, aflat in acelasi director/folder.</p>
+        </section>
+        <section class="card" id="connect-section">
+            <h2>Conectare</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/interf.png">
+            </div>
+            <p>Conectarea este posibila prin TCP/IP (in mod PG, OP sau S7) sau prin PRODAVE (in mod MPI/DP, TCP/IP sau ISO).</p>
+            <p>Pentru a putea utiliza PRODAVE, o copie a bibliotecii Prodave6.dll trebuie copiata in directorul din care ruleaza VirtualMCP.</p>
+            <h2>Conectare prin TCP/IP</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/interf_tcp.png">
+            </div>
+            <p><strong>Adresa PLC:</strong> setati aici adresa TCP/IP a sistemului la care doriti sa va conectati</p>
+            <p><strong>Rack:</strong> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).</p>
+            <p><strong>Slot:</strong> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <strong>Slot 2</strong> pentru <strong>Sinumerik 840Dsl cu PLC S7-300</strong> sau <strong>Slot 1</strong> pentru <strong>Sinumerik ONE cu PLC S7-1500.</strong></p>
+            <p><strong>Conectare la un sistem 'tinta':</strong> Dati 'Click' pe butonul <strong>'Conectare'</strong>.</p>
+            <h2>Conectare prin PRODAVE</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/interf_mpi.png">
+            </div>
+            <p><strong>Mod MPI/DP:</strong> conectare prin interfata MPI (de ex. Sinumerik 840D PowerLine: X127: MPI, 187.5k, adresa PLC = 2) sau interfata OPI (X101: MPI, 1.5M, adresa PLC = 13).</p>
+            <p><strong>Mod TCP/IP:</strong> conectare prin interfata Ethernet (de ex. Sinumerik 840D SolutionLine sau ONE).</p>
+            <p><strong>Sett.:</strong> Deschide meniul "Set PC/PG Interface" (pentru setarea interfetei de conectare Step7).</p>
+            <p><strong>Adresa PLC:</strong> setati aici adresa PLC a sistemului la care doriti sa va conectati.</p>
+            <p><strong>Rack:</strong> Sina (rack) pe care se afla unitatea CPU Step7 (in mod uzual Rack 0).</p>
+            <p><strong>Slot:</strong> Pozitia in Rack a unitatii CPU (Step7 slot of the CPU). <strong>Slot 2</strong> pentru <strong>Sinumerik 840Dsl cu PLC S7-300</strong> sau <strong>Slot 1</strong> pentru <strong>Sinumerik ONE cu PLC S7-1500.</strong></p>
+            <p><strong>Conectare la un sistem 'tinta':</strong> Dati 'Click' pe butonul <strong>'Conectare'</strong>.</p>
+
+            <h2>Adrese MCP I/O</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/connection_1.png">
+            </div>
+            <p>Setari pentru conexiune: Adrese Intrari si Iesiri MCP:<br>
+            <strong>MCP1: </strong>Adresele I/O pentru primul MCP, asa cum sunt identificate in DB7 la conectare.<br>
+            <strong>MCP2: </strong>Adresele I/O pentru al 2-lea MCP, asa cum sunt identificate in DB7 la conectare.<br>
+            <strong>Act.: </strong>Adresele I/O setate pentru VirtualMCP. Campurile sunt editabile.
+            </p>
+            <p>Intr-o configuratie Sinumerik, Panoul de Control a Masinii (Machine Control Panel) (MCP) este considerat un modul de Intrari/Iesiri pentru PLC. In mod simplificat putem considera ca tastele de pe MCP, comutatoarele de Override si selectorul cu cheie pentru nivelul ce acces sunt conectate hardware la intrari PLC in timp ce LED-urile sunt conectate hardware la iesiri ale PLC.</p>
+            <p>Pentru a configura modulele MCP, fabricantul masinii unelte (OEM) trebuie sa defineasca numarul de panouri MCP folosite si adresele I/O corespunzatoare acestora prin parametrizarea apelului functiei FB1,DB7 din blocul OB100.</p>
+            <p>La fiecare conectare la PLC, programul VirtualMCP comuta automat in modul 'Read-Only', apoi citeste din DB7 numarul de panouri MCP si pointer-ii la primele Intrari si Iesiri ale acestora. Daca adresele setate nu corespund nici adreselor detectate pentru MCP1 nuci adreselor detectate pentru MCP2, programul ramane in modul READ-ONLY.</p>
+            <p><em><strong>Nota:</strong> In unele cazuri fabricantul instalatiei (OEM) prefera utilizarea unor adrese dintr-un bloc DB in locul Intrarilor si Iesirilor, precum in imagine. Acest mod de adresare poate duce la confuzii dar este utilizat frecvent de catre OEM.</em></p>
+            <p><em><strong>Nota:</strong> Daca un modul MCP nu este inca montat, setarea unui MCP in OB100 (in apelul functiei FB1, B7) va declansa o alarma. Pentru a utiliza doar Virtual MCP, setati panoul MCP in mod uzual, apoi modificati parametrul <code>MCPBusType := B#16#00</code>.</em></p>
+            <h2>Mod 'Read Only' / Mod 'Control'</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/connection_1.png">
+            </div>
+            <p>In modul 'Read-Only', programul citeste starea tastelor, butoanelor de control avansuri (override), LED-urilor, etc de pe sistemul real fara sa modifice date. Apasarea unei taste in program nu infuenteaza starea sistemului real.<br>
+            Modul 'Control' poate fi activat prin apasarea butonului (Click) 'Read-Only / Control'.</p>
+            <h2>Salvare</h2>
+            <div class="help-section">
+                <img alt="Connection" title="Connection" src="images/button_save.png">
+            </div>
+            <p>Salvati setarile cu butonul "Save".<p>
+        </section>
+        <section class="card" id="setting-section">
+            <h2>Alte setari</h2>
+            <p>La apasarea butonului "Save", setarile sunt salvate in fisierul "monitor.ini" localizat in acelasi director/folder cu fisierul executabil.<br>
+            Toate setarile pot fi modificate in acest fisier si vor fi activate la pornirea/repornirea programului.</p>
+<pre><code>[display] ;diverse setari referitoare la afisare
+language=0    ;0 = Romana; 1 = English
+stayontop=0   ;0 = Stay on Top dezactivat;
+              ;1 = Stay on Top activat
+displ_time=50 ;Afisare ecran la fiecare 50ms
+
+[connection] ;setari pentru conectare
+;Cand autoreconnect=true: 
+;La pierderea conexiunii sau daca
+;o conectare nu este posibila,
+;programul va incerca din nou
+;pana la realizarea conexiunii
+autoreconnect=false
+;Numar secunde intre incercari
+reconnect_time=5 
+
+[server] ;Adresa PLC CPU
+;Adresa IP a PLC CPU
+address=192.168.214.1 
+;Numar Rack PLC, implicit 0
+rack=0 
+;Numar Slot PLC, 
+;implicit 0 pentru S7-1500
+;sau 2 pentru S7-300
+slot=2 
+
+[address]
+;Tip operand pentru prima coloana: intrari
+in_0_type=I ;[I/Q/M/DB] 
+;Numar DB, daca tipul operandului este DB
+in_0_dbno=0 ;[numar] 
+;Numar Byte
+in_0_addr=0 ;[numar] 
+;Tip operand pentru a 2-a coloana: iesiri
+out_0_type=Q ;[I/Q/M/DB] 
+;Numar DB, daca tipul operandului este DB
+out_0_dbno=0 ;[numar] 
+;Numar Byte
+out_0_addr=0 ;[numar] 
+</code></pre>
+        </section>
+        <section class="card" id="versions-section">
+            <h2>Versiuni:</h2>
+            <p>
+            v24.11.23: Adaugare optiune de schimbare rapida intre 2 setari MCP diferite. Trecere la Qt 5.12.9<br>
+            v24.09.14: Conectivitate prin ProDave: MPI, Profibus DP, Ethernet.<br>
+            v23.01.24: Scalare la dimensiunea ferestrei.<br>
+            v20.05.26: Corectat unele probleme legate de dimensiunea fonturilor.<br>
+            v20.05.23: La conectare sunt citite setarile pentru MCP din echipamentul real: numarul de module MCP si adresele acestora.<br>
+            v20.05.14: Simulare pentru MCP483, MCP310, posibilitatea de a seta 'Read-Only' sau 'Control Taste' sau 'Control Taste si Override'.
+            </p>
+        </section>
+    </main>
+    <footer class="footer">
+        <span>Virtual MCP</span>
+        <span>alxcor@yahoo.com</span>
+    </footer>
+    <script>
+        document.getElementById('bt_dark').addEventListener('click', () => {
+            const isDarkNow = document.body.classList.contains('dark') || 
+                              (!document.body.classList.contains('light') 
+                              && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            if (isDarkNow) {
+                document.body.classList.remove('dark');
+                document.body.classList.add('light');
+            } else {
+                document.body.classList.remove('light');
+                document.body.classList.add('dark');
+            }
+        });
+    </script>
+</body>
+</html>
